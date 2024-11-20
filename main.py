@@ -1,19 +1,15 @@
 import sys 
+import numpy as np
+
 
 file = sys.argv[1]
 
 with open(file, "r") as file:
-    file = file.read()
+    file = file.readlines()
 
-list = []
-for i in range(len(file)):
-    if file[i] == '\n':
-        
-        continue
-    
-    list[i].append(file[i])
+for elements in file:
+    for element in elements:
 
-print(list)
 
 
 
