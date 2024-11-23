@@ -2,8 +2,9 @@ import sys # Importing sys to use argv for getting command-line arguments
 import time 
 path = sys.argv[1] 
 
+start_time = time.time()
 matrix = []
-martix1 = []
+matrix1 = []
 
 # Function to check if the index is within the matrix
 def is_in_range(matrix, row, column):
@@ -64,7 +65,11 @@ len_matrix = len(matrix)
 
 for row in range(0, len_matrix):
     
+    matrix1_row = []
+
     for column in range(0, len_matrix):
+
+        cell = matrix[row][column]
 
         # Initializing the seven variables that we will need to use for counting the neighbours values
         healthy_o = 0
@@ -77,36 +82,88 @@ for row in range(0, len_matrix):
         total = 0   
                 
         for neighbour_row in range(row - 1, row + 2):
-            matrix1_row = []
+
             for neighbour_column in range(column - 1 , column + 2):
 
                 if neighbour_row == row and neighbour_column == column: # Skipping the element itself to only count the neighbours 
                         continue
                   
-                if is_in_range(matrix, neighbour_row, neighbour_column): # Checking if the index is in the range
+                elif is_in_range(matrix, neighbour_row, neighbour_column): # Checking if the index is in the range
 
-                    if matrix[neighbour_row][neighbour_column] == '.':
+                    neighbour = matrix[neighbour_row][neighbour_column]
+
+                    if neighbour == '.':
                         dead += 1
 
-                    elif matrix[neighbour_row][neighbour_column] == 'O':
+                    elif neighbour == 'O':
                         healthy_o += 1                    
 
-                    elif matrix[neighbour_row][neighbour_column] == 'o':
+                    elif neighbour == 'o':
                         weakened_o += 1
 
-                    elif matrix[neighbour_row][neighbour_column] == 'X':
+                    elif neighbour == 'X':
                         healthy_x += 1
 
-                    elif matrix[neighbour_row][neighbour_column] == 'x':
+                    elif neighbour == 'x':
                         weakened_x += 1
 
-                    total = (2 * healthy_o) + weakened_o - (0 * dead) + (-2 * healthy_x) + (-1 * weakened_x)    
+        total = (2 * healthy_o) + weakened_o - (0 * dead) + (-2 * healthy_x) + (-1 * weakened_x)
 
-            if is_prime(total):
-                row.append('o')
+        # Defining the rules for determining next step of a cell based on its current state and its neighbours
+        if cell == 'O':
+            if is_power_of_two(total):
+                matrix1_row.append('.')
             
+            elif is_less_ten(total):
+                matrix1_row.append('.')
+
+            else:
+                matrix1_row.append('O')
+        
+        elif cell == 'o':
+            if less_or_equal_zero(total):
+                matrix1_row.append('.')
+
+            elif greater_or_equal_eight(total):
+                matrix1_row.append('O')
+
+            else:
+                matrix1_row.append('o')
+
+        elif cell == '.':
+            if is_prime(total):
+                matrix1_row.append('o')
+
             elif abs_value_is_prime(total):
-                row.append('x')
+                matrix1_row.append('x')
+
+            else:
+                matrix1_row.append('.')
+        
+        elif cell == 'x':
+            if greater_or_equal_one(total):
+                matrix1_row.append('.')
+
+            elif less_or_equal_neg_eight(total):
+                matrix1_row.append('X')
             
             else:
-                row.append('.')
+                matrix1_row.append('x')
+
+        elif cell == 'X':
+            if abs_is_power_two(total):
+                matrix1_row.append('.')
+
+            elif greater_neg_ten(total):
+                matrix1_row.append('x')
+
+            else:
+                matrix1_row.append('X')
+    
+    matrix1.append(matrix1_row)
+
+
+for i in matrix1:
+    print(i)
+
+print(time.time() - start_time)
