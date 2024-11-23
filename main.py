@@ -25,7 +25,14 @@ def is_prime(num):
         return True
     return False
 
-print(is_prime(12))
+def is_less_ten(num):
+    return num < 10
+
+def less_or_equal_zero(num):
+    return num <= 0
+
+def greater_or_equal_eight(num):
+    return num >= 8
 
   
 # Reading the file and then appending it to a matrix
@@ -35,6 +42,8 @@ with open(path, 'r') as file:
         for char in line.strip():
             row.append(char)
         matrix.append(row)
+
+
 
 len_matrix = len(matrix)
 
@@ -58,7 +67,7 @@ for row in range(0, len_matrix):
 
                 if neighbour_row == row and neighbour_column == column: # Skipping the element itself to only count the neighbours 
                         continue
-                
+                  
                 if is_in_range(matrix, neighbour_row, neighbour_column): # Checking if the index is in the range
 
                     if matrix[neighbour_row][neighbour_column] == '.':
@@ -78,8 +87,4 @@ for row in range(0, len_matrix):
 
                     total = (2 * healthy_o) + weakened_o - (0 * dead) + (-2 * healthy_x) + (-1 * weakened_x)    
 
-                    if (is_power_of_two(total)):
-                                        
-
-
-
+                    
