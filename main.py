@@ -65,7 +65,7 @@ with open(path, 'r') as file:
 len_matrix = len(matrix)
 
 for i in range(100):
-    
+
     for row in range(0, len_matrix):
 
         for column in range(0, len_matrix):
@@ -164,10 +164,10 @@ for i in range(100):
 
     temp = matrix1
     matrix1 = matrix
-    matrix = temp        
+    matrix = temp
 
-
-print(len(matrix))
+print("This is matrix: ", matrix)
+print("\nThis is matrix1: ", matrix1)
 
 
 
