@@ -28,57 +28,58 @@ def is_prime(num):
 print(is_prime(12))
 
   
-# # Reading the file and then appending it to a matrix
-# with open(path, 'r') as file:
-#     for line in file:
-#         row = []
-#         for char in line.strip():
-#             row.append(char)
-#         matrix.append(row)
+# Reading the file and then appending it to a matrix
+with open(path, 'r') as file:
+    for line in file:
+        row = []
+        for char in line.strip():
+            row.append(char)
+        matrix.append(row)
 
-# len_matrix = len(matrix)
+len_matrix = len(matrix)
 
-# for row in range(0, len_matrix):
+for row in range(0, len_matrix):
     
-#     for column in range(0, len_matrix):
+    for column in range(0, len_matrix):
 
-#         # Initializing the seven variables that we will need to use next
-#         healthy_o = 0
-#         weakened_o = 0
+        # Initializing the seven variables that we will need to use next
+        healthy_o = 0
+        weakened_o = 0
 
-#         healthy_x = 0
-#         weakened_x = 0
+        healthy_x = 0
+        weakened_x = 0
 
-#         dead = 0       
-#         total = 0   
+        dead = 0       
+        total = 0   
                 
-#         for neighbour_row in range(row - 1, row + 2):
-#             matrix1_row = []
-#             for neighbour_column in range(column - 1 , column + 2):
+        for neighbour_row in range(row - 1, row + 2):
+            matrix1_row = []
+            for neighbour_column in range(column - 1 , column + 2):
 
-#                 if neighbour_row == row and neighbour_column == column: # Skipping the element itself to only count the neighbours 
-#                         continue
+                if neighbour_row == row and neighbour_column == column: # Skipping the element itself to only count the neighbours 
+                        continue
                 
-#                 if is_in_range(matrix, neighbour_row, neighbour_column): # Checking if the index is in the range
+                if is_in_range(matrix, neighbour_row, neighbour_column): # Checking if the index is in the range
 
-#                     if matrix[neighbour_row][neighbour_column] == '.':
-#                         dead += 1
+                    if matrix[neighbour_row][neighbour_column] == '.':
+                        dead += 1
 
-#                     elif matrix[neighbour_row][neighbour_column] == 'O':
-#                         healthy_o += 1                    
+                    elif matrix[neighbour_row][neighbour_column] == 'O':
+                        healthy_o += 1                    
 
-#                     elif matrix[neighbour_row][neighbour_column] == 'o':
-#                         weakened_o += 1
+                    elif matrix[neighbour_row][neighbour_column] == 'o':
+                        weakened_o += 1
 
-#                     elif matrix[neighbour_row][neighbour_column] == 'X':
-#                         healthy_x += 1
+                    elif matrix[neighbour_row][neighbour_column] == 'X':
+                        healthy_x += 1
 
-#                     elif matrix[neighbour_row][neighbour_column] == 'x':
-#                         weakened_x += 1
+                    elif matrix[neighbour_row][neighbour_column] == 'x':
+                        weakened_x += 1
 
-#                     total = (2 * healthy_o) + weakened_o - (0 * dead) + (-2 * healthy_x) + (-1 * weakened_x)    
+                    total = (2 * healthy_o) + weakened_o - (0 * dead) + (-2 * healthy_x) + (-1 * weakened_x)    
 
-#                     if                 
+                    if (is_power_of_two(total)):
+                                        
 
 
 
