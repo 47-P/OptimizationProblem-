@@ -34,7 +34,44 @@ def less_or_equal_zero(num):
 def greater_or_equal_eight(num):
     return num >= 8
 
-  
+def abs_value_is_prime(num):
+    return is_prime(abs(num))
+
+def greater_or_equal_one(num):
+    return num >= 1
+
+def less_or_equal_neg_eight(num):
+    return num <= -8
+
+def abs_is_power_two(num):
+    return is_power_of_two(abs(num))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Reading the file and then appending it to a matrix
 with open(path, 'r') as file:
     for line in file:
