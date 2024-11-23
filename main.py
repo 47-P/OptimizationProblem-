@@ -46,30 +46,8 @@ def less_or_equal_neg_eight(num):
 def abs_is_power_two(num):
     return is_power_of_two(abs(num))
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+def greater_neg_ten(num):
+    return num > -10
 
 
 # Reading the file and then appending it to a matrix
@@ -88,7 +66,7 @@ for row in range(0, len_matrix):
     
     for column in range(0, len_matrix):
 
-        # Initializing the seven variables that we will need to use next
+        # Initializing the seven variables that we will need to use for counting the neighbours values
         healthy_o = 0
         weakened_o = 0
 
@@ -124,4 +102,11 @@ for row in range(0, len_matrix):
 
                     total = (2 * healthy_o) + weakened_o - (0 * dead) + (-2 * healthy_x) + (-1 * weakened_x)    
 
-                    
+            if is_prime(total):
+                row.append('o')
+            
+            elif abs_value_is_prime(total):
+                row.append('x')
+            
+            else:
+                row.append('.')
