@@ -58,112 +58,117 @@ with open(path, 'r') as file:
         for char in line.strip():
             row.append(char)
         matrix.append(row)
+        matrix1.append(row)
 
 
 
 len_matrix = len(matrix)
 
-for row in range(0, len_matrix):
+for i in range(100):
     
-    matrix1_row = []
+    for row in range(0, len_matrix):
 
-    for column in range(0, len_matrix):
+        for column in range(0, len_matrix):
 
-        cell = matrix[row][column]
+            cell = matrix[row][column]
+            cell_step = matrix1[row][column]
 
-        # Initializing the seven variables that we will need to use for counting the neighbours values
-        healthy_o = 0
-        weakened_o = 0
+            # Initializing the seven variables that we will need to use for counting the neighbours values
+            healthy_o = 0
+            weakened_o = 0
 
-        healthy_x = 0
-        weakened_x = 0
+            healthy_x = 0
+            weakened_x = 0
 
-        dead = 0       
-        total = 0   
+            dead = 0       
+            total = 0   
+                    
+            for neighbour_row in range(row - 1, row + 2):
+
+                for neighbour_column in range(column - 1 , column + 2):
+
+                    if neighbour_row == row and neighbour_column == column: # Skipping the element itself to only count the neighbours 
+                            continue
+                    
+                    elif is_in_range(matrix, neighbour_row, neighbour_column): # Checking if the index is in the range
+
+                        neighbour = matrix[neighbour_row][neighbour_column]
+
+                        if neighbour == '.':
+                            dead += 1
+
+                        elif neighbour == 'O':
+                            healthy_o += 1                    
+
+                        elif neighbour == 'o':
+                            weakened_o += 1
+
+                        elif neighbour == 'X':
+                            healthy_x += 1
+
+                        elif neighbour == 'x':
+                            weakened_x += 1
+
+            total = (2 * healthy_o) + weakened_o - (0 * dead) + (-2 * healthy_x) + (-1 * weakened_x)
+
+            # Defining the rules for determining next step of a cell based on its current state and its neighbours
+            if cell == 'O':
+                if is_power_of_two(total):
+                    cell_step = '.'
                 
-        for neighbour_row in range(row - 1, row + 2):
+                elif is_less_ten(total):
+                    cell_step = 'o'
 
-            for neighbour_column in range(column - 1 , column + 2):
-
-                if neighbour_row == row and neighbour_column == column: # Skipping the element itself to only count the neighbours 
-                        continue
-                  
-                elif is_in_range(matrix, neighbour_row, neighbour_column): # Checking if the index is in the range
-
-                    neighbour = matrix[neighbour_row][neighbour_column]
-
-                    if neighbour == '.':
-                        dead += 1
-
-                    elif neighbour == 'O':
-                        healthy_o += 1                    
-
-                    elif neighbour == 'o':
-                        weakened_o += 1
-
-                    elif neighbour == 'X':
-                        healthy_x += 1
-
-                    elif neighbour == 'x':
-                        weakened_x += 1
-
-        total = (2 * healthy_o) + weakened_o - (0 * dead) + (-2 * healthy_x) + (-1 * weakened_x)
-
-        # Defining the rules for determining next step of a cell based on its current state and its neighbours
-        if cell == 'O':
-            if is_power_of_two(total):
-                matrix1_row.append('.')
+                else:
+                    cell_step = 'O'
             
-            elif is_less_ten(total):
-                matrix1_row.append('.')
+            elif cell == 'o':
+                if less_or_equal_zero(total):
+                    cell_step = '.'
 
-            else:
-                matrix1_row.append('O')
-        
-        elif cell == 'o':
-            if less_or_equal_zero(total):
-                matrix1_row.append('.')
+                elif greater_or_equal_eight(total):
+                    cell_step = 'O'
 
-            elif greater_or_equal_eight(total):
-                matrix1_row.append('O')
+                else:
+                    cell_step = 'o'
 
-            else:
-                matrix1_row.append('o')
+            elif cell == '.':
+                if is_prime(total):
+                    cell_step = 'o'
 
-        elif cell == '.':
-            if is_prime(total):
-                matrix1_row.append('o')
+                elif abs_value_is_prime(total):
+                    cell_step = 'x'
 
-            elif abs_value_is_prime(total):
-                matrix1_row.append('x')
-
-            else:
-                matrix1_row.append('.')
-        
-        elif cell == 'x':
-            if greater_or_equal_one(total):
-                matrix1_row.append('.')
-
-            elif less_or_equal_neg_eight(total):
-                matrix1_row.append('X')
+                else:
+                    cell_step = '.'
             
-            else:
-                matrix1_row.append('x')
+            elif cell == 'x':
+                if greater_or_equal_one(total):
+                    cell_step = '.'
 
-        elif cell == 'X':
-            if abs_is_power_two(total):
-                matrix1_row.append('.')
+                elif less_or_equal_neg_eight(total):
+                    cell_step = 'X'
+                
+                else:
+                    cell_step = 'x'
 
-            elif greater_neg_ten(total):
-                matrix1_row.append('x')
+            elif cell == 'X':
+                if abs_is_power_two(total):
+                    cell_step = '.'
 
-            else:
-                matrix1_row.append('X')
-    
-    matrix1.append(matrix1_row)
+                elif greater_neg_ten(total):
+                    cell_step = 'x'
+
+                else:
+                    cell_step = 'X'
+
+    temp = matrix1
+    matrix1 = matrix
+    matrix = temp        
 
 
-for i in matrix1:
-    print(i)
+print(len(matrix))
+
+
 
 print(time.time() - start_time)
