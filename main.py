@@ -1,7 +1,6 @@
-import sys # Importing sys to use argv for getting command-line arguments
 import time 
 import argparse
-
+import os
 
 def parse_arguments():
     parser = argparse.ArgumentParser(description="Cellular Automaton Simulation")
